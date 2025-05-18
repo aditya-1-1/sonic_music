@@ -1,0 +1,1 @@
+web: cd sonic_dj && gunicorn sonic_dj.wsgi:application 
