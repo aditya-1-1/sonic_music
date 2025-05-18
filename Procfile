@@ -1,1 +1,1 @@
-web: gunicorn sonic_dj.sonic_dj.wsgi:application --bind 0.0.0.0:$PORT 
+web: gunicorn sonic_dj.wsgi
