@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroovePad Studio</title>
+    <link rel="stylesheet" href="{% static 'css/groovepad.css' %}">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1><span>GroovePad Studio</span></h1>
+            <div class="global-controls">
+                <div class="control-group">
+                    <label for="master-volume">Master Volume</label>
+                    <input type="range" id="master-volume" min="0" max="100" value="80">
+                </div>
+                <div class="control-group">
+                    <label for="bpm">BPM</label>
+                    <input type="number" id="bpm" min="60" max="180" value="120">
+                </div>
+                <button id="stop-all" class="neon-button">Stop All</button>
+                <button id="record-toggle" class="neon-button record-btn">Record</button>
+                <button id="download-recording" class="neon-button" disabled>Download</button>
+                <button id="add-custom-beat" class="neon-button">Add Custom Beat</button>
+            </div>
+        </header>
+
+        <div class="visualizer-container">
+            <canvas id="visualizer"></canvas>
+        </div>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="all">All Pads</button>
+            <button class="mode-btn" data-mode="beats">Beats</button>
+            <button class="mode-btn" data-mode="melody">Melody</button>
+            <button class="mode-btn" data-mode="fx">FX</button>
+        </div>
+
+        <div class="pad-container"></div>
+
+        <div class="session-controls">
+            <button id="save-session" class="neon-button">Save Session</button>
+            <select id="load-session">
+                <option value="">Load Session</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Templates for dynamic content -->
+    <template id="pad-template">
+        <div class="pad" data-category="">
+            <div class="pad-content">
+                <span class="loader"></span>
+                <span class="beat-name"></span>
+            </div>
+            <div class="pad-controls">
+                <div class="control-group">
+                    <label>Vol</label>
+                    <input type="range" class="volume-control" min="0" max="100" value="80">
+                </div>
+                <div class="control-group">
+                    <label>Delay</label>
+                    <input type="range" class="delay-control" min="0" max="100" value="0">
+                </div>
+                <div class="control-group">
+                    <label>Filter</label>
+                    <input type="range" class="filter-control" min="0" max="100" value="100">
+                </div>
+                <button class="loop-btn">Loop</button>
+            </div>
+        </div>
+    </template>
+
+    <div id="custom-beat-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add Custom Beat</h2>
+            <div class="form-group">
+                <label for="beat-name">Beat Name:</label>
+                <input type="text" id="beat-name" placeholder="Enter a name for your beat">
+            </div>
+            <div class="form-group">
+                <label for="beat-category">Category:</label>
+                <select id="beat-category">
+                    <option value="beats">Beats</option>
+                    <option value="melody">Melody</option>
+                    <option value="fx">FX</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="beat-file">Audio File:</label>
+                <input type="file" id="beat-file" accept="audio/*">
+            </div>
+            <button id="upload-beat" class="neon-button">Add Beat</button>
+        </div>
+    </div>
+
+    <!-- Load the audio data -->
+    <script src="{% static 'js/audioData.js' %}"></script>
+    <script src="{% static 'js/groovepad.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liked Songs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/liked_songs.css' %}" />
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-nav" style="background: var(--sidebar-header-bg);">
+            <div class="logo">
+                <a href=""><img src="{% static 'images/newlogo.jpg' %}" alt="Sonic Player Logo"></a>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'home' %}" class="nav-link">
+                    <span><i class="fa-solid fa-house"></i></span>
+                    <span>&nbsp;&nbsp; Home</span>
+                </a></li>
+                <li><a href="{% url 'library' %}" class="nav-link">
+                    <span><i class="fa-brands fa-medium"></i></span>
+                    <span>&nbsp;&nbsp; Your Library</span>
+                </a></li>
+            </ul>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'moods' %}" class="nav-link">
+                    <span><i class="fa-solid fa-ghost"></i></span>
+                    <span>&nbsp;&nbsp; Moods</span>
+                </a></li>
+                <li><a href="{% url 'groovepad' %}" class="nav-link">
+                    <span><i class="fa-solid fa-music"></i></span>
+                    <span>&nbsp;&nbsp; Groovepad</span>
+                </a></li>
+                <li><a href="#" class="nav-link" id="historyLink">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                    <span>&nbsp;&nbsp; History</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="theme-toggle-container">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fa-solid fa-sun"></i>
+                <span>Light Mode</span>
+            </button>
+        </div>
+
+        <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="privacy">
+            <ul>
+                <li><p>Legal &nbsp;&nbsp; Safety & Privacy Centre &nbsp;&nbsp; Privacy policy</p></li>
+                <li><p>Cookies &nbsp;&nbsp; About Ads &nbsp;&nbsp; Accessibility</p></li>
+            </ul>
+        </div>
+        <div class="copy">
+           <p>&nbsp; &nbsp;&nbsp;Copyright © 2024 APK (All rights reserved)</p>
+        </div>
+    </div>
+
+    <div class="liked-songs-page main">
+        <h1>Liked Songs</h1>
+        <div id="likedSongsContainer" class="liked-songs-container">
+            <p>Loading liked songs...</p>
+        </div>
+    </div>
+
+    <!-- Playbar with visualizer -->
+    <div class="playbar" id="playbar">
+        <div class="playbar-content">
+            <div class="now-playing-container">
+                <img src="{% static 'images/default.jpg' %}" alt="Now Playing" id="nowPlayingImage">
+                <div class="playbar-info">
+                    <h4 id="nowPlayingTitle">Select a song to play</h4>
+                    <p id="nowPlayingArtist">Artist</p>
+                </div>
+            </div>
+            
+            <div class="player-controls">
+                <div class="controls">
+                    <button id="prevButton" class="control-btn"><i class="fa-solid fa-backward"></i></button>
+                    <button id="playPauseButton" class="control-btn play-pause-btn"><i class="fa-solid fa-play"></i></button>
+                    <button id="nextButton" class="control-btn"><i class="fa-solid fa-forward"></i></button>
+                </div>
+                
+                <div class="progress-container">
+                    <span id="currentTime">0:00</span>
+                    <div class="progress-bar-container">
+                        <input type="range" id="musicTracker" value="0" min="0" max="100">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            
+            <div class="volume-container">
+                <button id="muteButton" class="control-btn"><i class="fa-solid fa-volume-high"></i></button>
+                <input type="range" id="volumeControl" min="0" max="100" value="100">
+                <button id="visualizerToggle" class="control-btn"><i class="fa-solid fa-wave-square"></i></button>
+            </div>
+        </div>
+        
+        <!-- Audio visualizer -->
+        <div id="visualizer" class="audio-visualizer">
+            <canvas id="visualizerCanvas"></canvas>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+
+    <script src="{% static 'js/home.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof fetchLikedSongs === 'function') {
+                fetchLikedSongs();
+            }
+            if (typeof attachPlayButtonListeners === 'function') {
+                attachPlayButtonListeners();
+            }
+            // Debug: log play button clicks
+            document.body.addEventListener('click', (event) => {
+                if (event.target.closest('.play-btn')) {
+                    console.log('Play button clicked:', event.target.closest('.play-btn'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

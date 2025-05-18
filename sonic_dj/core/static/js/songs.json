@@ -1,0 +1,364 @@
+{
+    "songs": [
+        {
+            "title": "Arijit Singh",
+            "artist": "Artist",
+            "genre": "Bollywood",
+            "mood": "Happy",
+            "photo_url": "static/images/image copy.png",
+            "audio_url": "static/audio/arijit.mp3"
+        },
+        {
+            "title": "Justin Bieber",
+            "artist": "Artist",
+            "genre": "Pop",
+            "mood": "Excited",
+            "photo_url": "static/images/image copy 4.png",
+            "audio_url": "static/audio/justin.mp3"
+        },
+        {
+            "title": "Hariharan",
+            "artist": "Artist",
+            "genre": "Classical",
+            "mood": "Meditation",
+            "photo_url": "static/images/image copy 2.png",
+            "audio_url": "static/audio/hariharan.mp3"
+        },
+        {
+            "title": "Alan Walker",
+            "artist": "Artist",
+            "genre": "EDM",
+            "mood": "Excited",
+            "photo_url": "static/images/image copy 3.png",
+            "audio_url": "static/audio/kygo.mp3"
+        },
+        {
+            "title": "Billie Eilish",
+            "artist": "Artist",
+            "genre": "Pop",
+            "mood": "Sad",
+            "photo_url": "static/images/image.png",
+            "audio_url": "static/audio/billie.mp3"
+        },
+        {
+            "title": "Glory",
+            "artist": "Yo Yo Honey Singh",
+            "genre": "Hip Hop",
+            "mood": "Excited",
+            "photo_url": "https://tse2.mm.bing.net/th?id=OIP.ejyQME9-36oMc9RKztpqyQHaEK&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/glory.mp3"
+        },
+        {
+            "title": "Yeh Jawaani",
+            "artist": "Pritam",
+            "genre": "Bollywood",
+            "mood": "Happy",
+            "photo_url": "https://tse3.mm.bing.net/th?id=OIP.SYOJc1Ghu9wsLMDCorhFiQHaIg&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/badtameez.mp3"
+        },
+        {
+            "title": "Still Rolling",
+            "artist": "Shubh",
+            "genre": "Punjabi",
+            "mood": "Excited",
+            "photo_url": "https://tse1.mm.bing.net/th?id=OIP.XgSDVMJ1JwOe_0nOzNnkxwHaFj&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/still.mp3"
+        },
+        {
+            "title": "Animal",
+            "artist": "Manan Bhardwaj, Vishal Mishra, Jaani",
+            "genre": "Bollywood",
+            "mood": "Excited",
+            "photo_url": "https://tse4.mm.bing.net/th?id=OIP.raJCZ85vDTelZDnG2LbH-wHaKX&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/animal.mp3"
+        },
+        {
+            "title": "Ghost",
+            "artist": "Diljit Dosanjh",
+            "genre": "Punjabi",
+            "mood": "Excited",
+            "photo_url": "https://tse2.mm.bing.net/th?id=OIP.IJyIxpjonzB2Xzv8d_HXGgHaM4&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/ghost.mp3"
+        },
+        {
+            "title": "Ekantik Vartalaap",
+            "artist": "Shrii hit Premanand Govind Sharan Ji Maharaj",
+            "genre": "Spiritual",
+            "mood": "Meditation",
+            "photo_url": "https://tse1.mm.bing.net/th?id=OIP.NA1KoLAojR1eaF4lYH8x0wHaE7&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/vartalaap.mp3"
+        },
+        {
+            "title": "Srimad Bhagwat Geeta",
+            "artist": "Hare Krishna Podcast",
+            "genre": "Spiritual",
+            "mood": "Meditation",
+            "photo_url": "https://tse2.mm.bing.net/th?id=OIP.RcHKLQDWxhYbkFsvsfmEaQHaFj&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/bhagwat.mp3"
+        },
+        {
+            "title": "Shiv Puran",
+            "artist": "Anupama Dhunsoiya",
+            "genre": "Spiritual",
+            "mood": "Meditation",
+            "photo_url": "https://tse3.mm.bing.net/th?id=OIP.m1D58vg8ysKpRTIS_z7ElgHaDt&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/shiv.mp3"
+        },
+        {
+            "title": "Shree Krishna Leela",
+            "artist": "Spotify Studios",
+            "genre": "Spiritual",
+            "mood": "Meditation",
+            "photo_url": "https://tse2.mm.bing.net/th?id=OIP.bIBVTtNn_5bsp7RY9BnmFwHaGL&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/leela.mp3"
+        },
+        {
+            "title": "Chanakya Neeti",
+            "artist": "Vishal S",
+            "genre": "Spiritual",
+            "mood": "Focus",
+            "photo_url": "https://tse4.mm.bing.net/th?id=OIP.Hof0v1At2vDxsJQGc8Z1WgHaFj&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/vartalaap.mp3"
+        },
+        {
+            "title": "Late Night Cool",
+            "artist": "Soothing Tunes",
+            "genre": "Ambient",
+            "mood": "Refresher",
+            "photo_url": "https://tse1.mm.bing.net/th?id=OIP.FqKec4Hh8jsEmlRVahyRHQHaHa&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/night.mp3"
+        },
+        {
+            "title": "Bollywood Sufi",
+            "artist": "Mystical Sufi",
+            "genre": "Sufi",
+            "mood": "Meditation",
+            "photo_url": "https://tse4.mm.bing.net/th?id=OIP.YGG5vvnsH4N-IikALY89DAHaDw&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/bollywood.mp3"
+        },
+        {
+            "title": "Soulful Tunes",
+            "artist": "Heartful Melodies",
+            "genre": "Instrumental",
+            "mood": "Refresher",
+            "photo_url": "https://tse4.mm.bing.net/th?id=OIP.ObJS2IpSOoUielTXDlGUlwHaD4&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/soulful.mp3"
+        },
+        {
+            "title": "It's Okay Not To Be Okay",
+            "artist": "Chill Vibes",
+            "genre": "Lo-fi",
+            "mood": "Refresher",
+            "photo_url": "https://tse1.mm.bing.net/th?id=OIP.jxWG0o5RgSzwhbjUKXZ8IAHaKe&pid=Api&P=0&h=180",
+            "audio_url": "static/audio/ok.mp3"
+        },
+        {
+            "title": "Lofi Beats",
+            "artist": "Relaxing Lofi",
+            "genre": "Lo-fi",
+            "mood": "Focus",
+            "photo_url": "https://diffusionart.co/wp-content/uploads/2023/04/Lofi-Music-Anime-Graphics-Wallpapers9.png",
+            "audio_url": "static/audio/lofi.mp3"
+        },
+        {
+            "title": "New Dawn",
+            "artist": "Sunrise Ensemble",
+            "genre": "Instrumental",
+            "mood": "Happy",
+            "photo_url": "static/images/newdawn.jpg",
+            "audio_url": "static/audio/beat1.mp3"
+        },
+        {
+            "title": "Energetic Pulse",
+            "artist": "DJ Vibes",
+            "genre": "EDM",
+            "mood": "Excited",
+            "photo_url": "static/images/energeticpulse.jpg",
+            "audio_url": "static/audio/Beat2.mp3"
+        },
+        {
+            "title": "Calm Waters",
+            "artist": "Nature Sounds",
+            "genre": "Ambient",
+            "mood": "Meditation",
+            "photo_url": "static/images/calmwaters.jpg",
+            "audio_url": "static/audio/Beat3.mp3"
+        },
+        {
+            "title": "Melancholy Breeze",
+            "artist": "Sad Tunes",
+            "genre": "Blues",
+            "mood": "Sad",
+            "photo_url": "static/images/melancholybreeze.jpg",
+            "audio_url": "static/audio/Beat4.mp3"
+        },
+        {
+            "title": "Focus Flow",
+            "artist": "Concentration Beats",
+            "genre": "Lo-fi",
+            "mood": "Focus",
+            "photo_url": "static/images/focusflow.jpg",
+            "audio_url": "static/audio/Beat5.mp3"
+        },
+        {
+            "title": "Refreshing Morning",
+            "artist": "Fresh Start",
+            "genre": "Pop",
+            "mood": "Refresher",
+            "photo_url": "static/images/refreshingmorning.jpg",
+            "audio_url": "static/audio/Beat6.mp3"
+        },
+        {
+            "title": "Song 27",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat7.mp3"
+        },
+        {
+            "title": "Song 28",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat8.mp3"
+        },
+        {
+            "title": "Song 29",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat9.mp3"
+        },
+        {
+            "title": "Song 30",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat10.mp3"
+        },
+        {
+            "title": "Song 31",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/arijit.mp3"
+        },
+        {
+            "title": "Song 32",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/bollywood.mp3"
+        },
+        {
+            "title": "Song 33",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/lofi.mp3"
+        },
+        {
+            "title": "Song 34",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/soulful.mp3"
+        },
+        {
+            "title": "Song 35",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/night.mp3"
+        },
+        {
+            "title": "Song 36",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/beat1.mp3"
+        },
+        {
+            "title": "Song 37",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat2.mp3"
+        },
+        {
+            "title": "Song 38",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat3.mp3"
+        },
+        {
+            "title": "Song 39",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat4.mp3"
+        },
+        {
+            "title": "Song 40",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat5.mp3"
+        },
+        {
+            "title": "Song 41",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat6.mp3"
+        },
+        {
+            "title": "Song 42",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat7.mp3"
+        },
+        {
+            "title": "Song 43",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat8.mp3"
+        },
+        {
+            "title": "Song 44",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat9.mp3"
+        },
+        {
+            "title": "Song 45",
+            "artist": "Unknown",
+            "genre": "Unknown",
+            "mood": "Unknown",
+            "photo_url": "",
+            "audio_url": "static/audio/Beat10.mp3"
+        }
+    ]
+}

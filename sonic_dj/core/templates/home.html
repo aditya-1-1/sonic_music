@@ -1,0 +1,345 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Sonic Player - Music Streaming">
+    <meta property="og:description" content="Stream and share your favorite music">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frijole&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chela+One&family=Frijole&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <title>Sonic Player</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-nav" style="background: var(--sidebar-header-bg);">
+            <div class="logo">
+                <a href=""><img src="{% static 'images/sidelogo.jpg' %}" alt="Sonic Player Logo"></a>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'home' %}" class="nav-link active">
+                    <span><i class="fa-solid fa-house"></i></span>
+                    <span>&nbsp;&nbsp; Home</span>
+                </a></li>
+            </ul>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'moods' %}" class="nav-link">
+                    <span><i class="fa-solid fa-ghost"></i></span>
+                    <span>&nbsp;&nbsp; Moods</span>
+                </a></li>
+                <li><a href="{% url 'groovepad' %}" class="nav-link">
+                    <span><i class="fa-solid fa-music"></i></span>
+                    <span>&nbsp;&nbsp; Groovepad</span>
+                </a></li>
+                <li><a href="#" class="nav-link" id="historyLink">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                    <span>&nbsp;&nbsp; History</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="theme-toggle-container">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fa-solid fa-sun"></i>
+                <span>Light Mode</span>
+            </button>
+        </div>
+
+        <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="privacy">
+            <ul>
+                <li><p>Legal &nbsp;&nbsp; Safety & Privacy Centre &nbsp;&nbsp; Privacy policy</p></li>
+                <li><p>Cookies &nbsp;&nbsp; About Ads &nbsp;&nbsp; Accessibility</p></li>
+            </ul>
+        </div>
+        <div class="copy">
+           <p>&nbsp; &nbsp;&nbsp;Copyright © 2024 APK (All rights reserved)</p>
+        </div>
+    </div>
+
+    <div class="main"> 
+        <div class="top-nav">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="prev-btn">
+                <span><i class="fa-solid fa-bell notification-icon"></i></span>
+                <div class="notification-badge" id="notificationBadge">0</div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search songs, artists...">
+                <button type="submit" id="searchButton"><i class="fa-solid fa-search"></i></button>
+            </div>
+
+            <div class="login-btn">
+                {% if user.is_authenticated %}
+                <div class="user-info">
+                    <span>{{ user.username }}</span>
+                    <img src="{% static 'images/logo.png' %}" alt="Profile Picture" class="profile-pic">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn"><i class="fa-solid fa-chevron-down"></i></button>
+                <div class="user-dropdown-content">
+                    <a href="#" id="viewHistoryBtn"><i class="fa-solid fa-clock-rotate-left"></i> View History</a>
+                    <a href="{% url 'liked_songs' %}" id="likedSongsLinkDropdown" target="_blank"><i class="fa-regular fa-heart"></i> Liked Songs</a>
+                    <a href="#" id="settingsBtn"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </div>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'signup' %}"><button class="sign-up">Sign-Up</button></a>
+                <a href="{% url 'login' %}"><button class="login">Login</button></a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div id="searchResults" class="search-results" style="display: none;">
+            <div class="search-results-header">
+                <div class="search-results-count">0 results found</div>
+                <button class="search-results-close-btn" id="searchResultsCloseBtn">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div id="searchResultsList" class="search-results-list"></div>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div id="recommendationsSection" class="recommendations-section">
+            <div class="section-header">
+                <h2>Recommended For You</h2>
+                <p>Based on your listening history</p>
+            </div>
+            <div id="recommendationsContainer" class="recommendations-list">
+                <!-- Recommendations will be loaded here -->
+                <div class="loading-spinner">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="playlist">
+            <div id="playlistsContainer">
+                {% for playlist_name, songs in playlists.items %}
+                <div class="card playlist-card">
+                    <h3>{{ playlist_name }}</h3>
+                    <div class="item">
+                        {% for song in songs %}
+                        <div class="song" data-song-id="{{ forloop.counter }}">
+                            <div class="song-image-container">
+                                <img src="{{ song.image|default:'https://via.placeholder.com/150' }}" alt="{{ song.title }}" loading="lazy">
+                                <div class="song-overlay">
+                                    <div class="play-btn" data-audio="{{ song.audio_url }}" data-title="{{ song.title }}" data-artist="{{ song.artist }}" data-image="{{ song.image }}">
+                                        <i class="fa-solid fa-play"></i>
+                                    </div>
+                                    <div class="heart-btn" data-title="{{ song.title }}" data-artist="{{ song.artist }}" data-audio="{{ song.audio_url }}" data-image="{{ song.image }}">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="song-title">{{ song.title }}</h4>
+                            <p class="song-artist">{{ song.artist }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <div class="footer">
+                <div class="footer-links">
+                    <div class="columns">
+                        <div>Company</div>
+                        <ul class="col-links">
+                            <li><a href="">About</a></li>
+                            <li><a href="">Jobs</a></li>
+                            <li><a href="">For the Records</a></li>
+                        </ul>
+                    </div>
+                    <div class="columns">
+                        <div>Community</div>
+                        <ul class="col-links">
+                            <li><a href="">For Artists</a></li>
+                            <li><a href="">Developers</a></li>
+                            <li><a href="">Advertising</a></li>
+                            <li><a href="">Investors</a></li>
+                            <li><a href="">Vendors</a></li>
+                        </ul>
+                    </div>
+                    <div class="columns">
+                        <div>Useful Links</div>
+                        <ul class="col-links">
+                            <li><a href="">Support</a></li>
+                            <li><a href="">Free Mobile App</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playbar with visualizer -->
+    <div class="playbar" id="playbar">
+        <div class="playbar-content">
+            <div class="now-playing-container">
+                <img src="{% static 'images/default.jpg' %}" alt="Now Playing" id="nowPlayingImage">
+                <div class="playbar-info">
+                    <h4 id="nowPlayingTitle">Select a song to play</h4>
+                    <p id="nowPlayingArtist">Artist</p>
+                </div>
+            </div>
+            
+            <div class="player-controls">
+                <div class="controls">
+                    <button id="prevButton" class="control-btn"><i class="fa-solid fa-backward"></i></button>
+                    <button id="playPauseButton" class="control-btn play-pause-btn"><i class="fa-solid fa-play"></i></button>
+                    <button id="nextButton" class="control-btn"><i class="fa-solid fa-forward"></i></button>
+                </div>
+                
+                <div class="progress-container">
+                    <span id="currentTime">0:00</span>
+                    <div class="progress-bar-container">
+                        <input type="range" id="musicTracker" value="0" min="0" max="100">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            
+            <div class="volume-container">
+                <button id="muteButton" class="control-btn"><i class="fa-solid fa-volume-high"></i></button>
+                <input type="range" id="volumeControl" min="0" max="100" value="100">
+                <button id="visualizerToggle" class="control-btn"><i class="fa-solid fa-wave-square"></i></button>
+            </div>
+        </div>
+        
+        <!-- Audio visualizer -->
+        <div id="visualizer" class="audio-visualizer">
+            <canvas id="visualizerCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Listening History</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="history-header">
+                    <div class="history-filter">
+                        <label for="historyFilter">Filter by:</label>
+                        <select id="historyFilter">
+                            <option value="all">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                    <button id="clearHistoryBtn" class="btn-danger">
+                        <i class="fa-solid fa-trash"></i> Clear History
+                    </button>
+                </div>
+                <div class="history-container" id="historyContainer">
+                    <div class="loading-spinner">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                    </div>
+                    <!-- History will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liked Songs Modal -->
+    <div id="likedSongsModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Liked Songs</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="likedSongsContainerModal" class="liked-songs-container">
+                    <p>Loading liked songs...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+    <div id="toastNotification" class="toast-notification">
+        <div class="toast-content">
+            <i class="fa-solid fa-circle-check toast-icon"></i>
+            <div class="toast-message">Song added to favorites!</div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+
+            // Set initial theme based on localStorage
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeToggle(savedTheme);
+
+            // Add event listener for theme toggle
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeToggle(newTheme);
+            });
+
+            function updateThemeToggle(theme) {
+                const icon = themeToggle.querySelector('i');
+                const label = themeToggle.querySelector('span');
+                if (theme === 'dark') {
+                    icon.className = 'fa-solid fa-sun';
+                    label.textContent = 'Light Mode';
+                } else {
+                    icon.className = 'fa-solid fa-moon';
+                    label.textContent = 'Dark Mode';
+                }
+            }
+
+            document.querySelectorAll('.add-to-playlist-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const dropdown = this.nextElementSibling;
+                    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+
+            document.querySelectorAll('.add-to-playlist-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const playlistId = this.getAttribute('data-playlist-id');
+                    const songTitle = this.closest('.add-btn').querySelector('.add-to-playlist-btn').getAttribute('data-title');
+                    // Add logic to send the song to the selected playlist
+                    console.log(`Adding song "${songTitle}" to playlist ID: ${playlistId}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

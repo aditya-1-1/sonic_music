@@ -1,0 +1,522 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moods</title>
+    <link rel="stylesheet" href="{% static 'css/moods.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Frijole&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chela+One&family=Frijole&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-nav" style="background: black;">
+            <div class="logo">
+                <a href=""><img src="{% static 'images/newlogo.jpg' %}" alt=""></a>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'home' %}">
+                    <span><i class="fa-solid fa-house"></i></span>
+                    <span>&nbsp;&nbsp; Home</span>
+                </a></li>
+                <li><a href="{% url 'library' %}">
+                    <span><i class="fa-brands fa-medium"></i></span>
+                    <span> &nbsp;&nbsp; Your Library</span>
+                </a></li>
+            </ul>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'moods' %}">
+                    <span><i class="fa-solid fa-ghost"></i></span>
+                    <span> &nbsp;&nbsp; Moods</span>
+                </a></li>
+                <li><a href="{% url 'groovepad' %}">
+                    <span><i class="fa-solid fa-music"></i></span>
+                    <span>&nbsp;&nbsp; Groovepad</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="social-icons">
+            <a href="#">
+             <i class="fab fa-facebook-f">
+             </i>
+            </a>
+            <a href="#">
+             <i class="fab fa-twitter">
+             </i>
+            </a>
+            <a href="#">
+             <i class="fab fa-linkedin-in">
+             </i>
+            </a>
+           </div>
+
+        <div class="privacy">
+            <ul>
+                <li>
+                    <p>Legal &nbsp;&nbsp; Safety & Privacy Centre &nbsp;&nbsp; Privacy policy</p>
+                </li>
+                <li>
+                    <p> Cookies &nbsp;&nbsp; About Ads &nbsp;&nbsp; Accessibilty</p>
+                </li>
+                <li>
+                    <p> Cookies</p>
+                </li>
+            </ul>
+        </div>
+        <div class="copy" style="color: rgb(167, 166, 166);">
+           <p> &nbsp; &nbsp;&nbsp; Copyright © 2024 APK (All rights reserved)</p>
+        </div>
+    </div>
+
+    <div id="page" class="site">
+        <div class="container">
+            <nav>
+                <label for="link" class="link" id="menuToggle">
+                    <i class="ri-menu-3-line ri-2x"></i>
+                </label>
+                <ul class="submenu" id="submenu">
+                    <li><a href="#" data-song="{% static 'audio/kygo.mp3' %}"><span>Happy</span><i class="ri-user-smile-fill"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/bekhayali.mp3' %}"><span>Sad</span><i class="ri-emotion-sad-fill"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/justin.mp3' %}"><span>Excited</span><i class="ri-wireless-charging-line"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/ghungroo.mp3' %}"><span>Anything</span><i class="ri-send-to-back"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/billie.mp3' %}"><span>Refresher</span><i class="ri-refresh-fill"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/om.mp3' %}"><span>Focus</span><i class="ri-focus-3-fill"></i></a></li>
+                    <li><a href="#" data-song="{% static 'audio/gayatri.mp3' %}"><span>Meditation</span><i class="ri-service-fill"></i></a></li>
+                </ul>
+            </nav>
+        </div>  
+        <div class="music" id="moodPlaylistContainer" style="display:none; overflow: hidden;">
+            <div class="title" style="background:linear-gradient(to right, #210358, hsl(258deg 55.18% 13.4%));">
+                <img id="mood-playlist-image" src="data:image/png;base64,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">
+                <div class="about">
+                    <h1 id="mood-playlist-title">Mood Playlist</h1>
+                    <p id="mood-playlist-info">Random songs based on your mood</p>
+                </div>
+            </div>
+            <div class="list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Song</th>
+                            <th>Artist</th>
+                            <th>Play</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mood-song-list"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <audio id="moodAudioPlayer" style="display:none"></audio>
+        
+    </div>
+
+    <audio id="audio"></audio> 
+    <div class="playbar" style="display: none;">
+        <div class="playbar-content">
+            <img src="" alt="Song Image" id="playbar-img" class="playbar-image">
+            <div class="playbar-info">
+                <h4 id="playbar-title">Song Title</h4>
+                <p id="playbar-artist">Artist</p>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="playbar-nav">
+                <button id="prevBtn" class="playbar-btn"><i class="fa-solid fa-backward-step"></i></button>
+                <button id="playPauseBtn" class="playbar-btn"><i class="fa-solid fa-play"></i></button>
+                <button id="nextBtn" class="playbar-btn"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+            <div class="playbar-time">
+                <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+            </div>
+            <input type="range" id="musicTracker" value="0" max="100" class="playbar-tracker">
+        </div>
+    </div>
+    <style>
+        .playbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to right, #210358, hsl(258deg 55.18% 13.4%));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .playbar-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .playbar-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .playbar-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #playbar-title {
+            color: white;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        #playbar-artist {
+            color: rgba(255,255,255,0.7);
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 50%;
+        }
+        
+        .playbar-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .playbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .playbar-time {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .playbar-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+        
+        .playbar-tracker {
+            width: 100%;
+            height: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            outline: none;
+        }
+        
+        .playbar-tracker::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .playbar {
+                padding: 0 10px;
+                height: 70px;
+            }
+            
+            .playbar-image {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .controls {
+                width: 60%;
+            }
+        }
+
+        .submenu {
+            position: absolute;
+            margin-top: 250px;
+            top: 105%;
+            left: 65%;
+            transform: translateX(-50%) translateY(0) scale(1);
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            opacity: 1;
+            transform-origin: top center;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            background: black;
+            width: 200px;
+            padding: 10px 0;
+            border-radius: 5px;
+        }
+        .submenu.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-15px) scale(0.95);
+            pointer-events: none;
+        }
+        nav {
+            position: relative;
+        }
+        .submenu li {
+            transition: all 0.5s ease;
+            transform: translateX(0);
+        }
+        .submenu.hidden li {
+            transform: translateX(20px);
+        }
+        .submenu.hidden li:nth-child(odd) {
+            transform: translateX(-20px);
+        }
+        .link{
+            z-index: 300;
+        }
+        .link i {
+            z-index: 300;
+            transition: transform 0.5s ease;
+        }
+        .link.active i {
+            transform: rotate(90deg);
+        }
+        .ripple {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: ripple 0.9s ease-out;
+        }
+        @keyframes ripple {
+            to {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script>
+        // Toggle submenu visibility with enhanced animation
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const submenu = document.getElementById('submenu');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            submenu.classList.toggle('hidden');
+            menuToggle.classList.toggle('active');
+            
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+
+        const audio = document.getElementById('moodAudioPlayer');
+        const songList = document.getElementById("mood-song-list");
+        let currentPlaylist = [];
+        
+        document.querySelectorAll('.submenu a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                const mood = this.querySelector('span').innerText.trim();
+                // Always show the playlist container and update title/info
+                document.getElementById("moodPlaylistContainer").style.display = "block";
+                document.getElementById("mood-playlist-title").innerText = `${mood} Playlist`;
+                document.getElementById("mood-playlist-info").innerText = `Songs to match your ${mood.toLowerCase()} mood`;
+                // Fetch songs for the selected mood
+                fetch(`/songs_by_mood/${mood}`)
+                    .then(response => response.json())
+                    .then(songs => {
+                        if (songs.length === 0) {
+                            alert('No songs found for this mood');
+                            return;
+                        }
+                        // Pick a random song
+                        const randomIndex = Math.floor(Math.random() * songs.length);
+                        // Update the playlist UI
+                        updateSongList(songs);
+                        // Play the random song
+                        playMoodSong(randomIndex);
+                    })
+                    .catch(error => {
+                        alert('Error loading songs for this mood');
+                    });
+            });
+        });
+        
+        function updateSongList(songs) {
+            if (songs.length === 0) {
+                songList.innerHTML = '<tr><td colspan="4">No songs found for this mood</td></tr>';
+                return;
+            }
+            
+            songList.innerHTML = songs.map((song, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>
+                        <div class="song-item">
+                            <img src="${song.image}" alt="${song.title}" class="song-image">
+                            <span>${song.title}</span>
+                        </div>
+                    </td>
+                    <td>${song.artist}</td>
+                    <td><button onclick="playMoodSong(${index})"><i class="fa-solid fa-play"></i></button></td>
+                </tr>
+            `).join('');
+            // Restore: currentPlaylist is all songs
+            currentPlaylist = songs;
+        }
+   
+    const moodAudio = document.getElementById('moodAudioPlayer');
+    const playbar = document.querySelector('.playbar');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playbarTitle = document.getElementById('playbar-title');
+    const playbarArtist = document.getElementById('playbar-artist');
+    const playbarImg = document.getElementById('playbar-img');
+    const musicTracker = document.getElementById('musicTracker');
+
+    let hideTimeout;
+
+    function showPlaybar() {
+        playbar.classList.add('show');
+        playbar.style.display = 'flex';
+
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            playbar.classList.remove('show');
+        }, 5000);
+    }
+
+    // Update playbar data and show
+    function updatePlaybar(song) {
+        playbarTitle.textContent = song.title;
+        playbarArtist.textContent = song.artist;
+        playbarImg.src = song.image;
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        showPlaybar();
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+        if (moodAudio.paused) {
+            moodAudio.play();
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        } else {
+            moodAudio.pause();
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        }
+        showPlaybar();
+    });
+
+    musicTracker.addEventListener('input', () => {
+        const seekTime = (musicTracker.value / 100) * moodAudio.duration;
+        moodAudio.currentTime = seekTime;
+    });
+
+    moodAudio.addEventListener('timeupdate', () => {
+        const progress = (moodAudio.currentTime / moodAudio.duration) * 100;
+        musicTracker.value = progress || 0;
+    });
+
+    // Optional: Pause UI reset when song ends
+    moodAudio.addEventListener('ended', () => {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        // Auto-play next song when current ends
+        const currentIndex = currentPlaylist.findIndex(song => song.audio === moodAudio.src);
+        if (currentIndex < currentPlaylist.length - 1) {
+            playMoodSong(currentIndex + 1);
+        }
+    });
+
+    // Previous/next button functionality
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        const currentIndex = currentPlaylist.findIndex(song => song.audio === moodAudio.src);
+        if (currentIndex > 0) {
+            playMoodSong(currentIndex - 1);
+        }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        const currentIndex = currentPlaylist.findIndex(song => song.audio === moodAudio.src);
+        if (currentIndex < currentPlaylist.length - 1) {
+            playMoodSong(currentIndex + 1);
+        }
+    });
+
+    // Hook into your playMoodSong function
+    async function getPlayableAudioUrl(audioField) {
+        // Check if the audioField is an external URL
+        if (audioField.startsWith('http://') || audioField.startsWith('https://')) {
+            return audioField; // Return the external URL directly
+        }
+        // Ensure the path starts with /static/audio/ for local files
+        if (!audioField.startsWith('/static/audio/')) {
+            if (audioField.startsWith('static/audio/')) {
+                return '/' + audioField;
+            }
+            return '/static/audio/' + audioField;
+        }
+        return audioField;
+    }
+
+    async function playMoodSong(index) {
+        const song = currentPlaylist[index];
+        const audioUrl = await getPlayableAudioUrl(song.audio || song.audio_url);
+        console.log('Playing song:', song.title, 'by', song.artist, 'URL:', audioUrl); // Debugging log
+        if (!audioUrl) {
+            alert('No audio file available for this song.');
+            return;
+        }
+        moodAudio.src = audioUrl;
+        moodAudio.play().catch((error) => {
+            console.error('Error playing audio:', error); // Debugging log
+            alert('Audio file not found or not supported.');
+        });
+        updatePlaybar(song);
+    }
+
+
+    
+    </script>
+        
+</body>
+</html>
