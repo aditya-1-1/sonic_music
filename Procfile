@@ -1,1 +1,1 @@
-web: cd sonic_dj && gunicorn sonic_dj.wsgi:application 
+web: cd sonic_dj && PYTHONPATH=$PYTHONPATH:. gunicorn sonic_dj.wsgi:application --bind 0.0.0.0:$PORT 
